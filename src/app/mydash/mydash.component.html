@@ -1,0 +1,23 @@
+<div class="grid-container">
+    <div style="text-align: center;"><div style="color: red; font-size: 18px;">AWS COST</div><div style="text-align: center;">Rs.{{awscost.today}}(Today)|Rs.{{awscost.week}}(This Week)|Rs.{{awscost.month}}(This Month)</div></div>
+  <mat-grid-list cols="12" rowHeight="270px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title [ngStyle]="{'font-size':'24px', 'color':'teal'}">
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngFor="let content of contents" class="dashboard-card-content">
+          <div>{{content.mid}}&nbsp;:&nbsp;{{content.usage}}</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

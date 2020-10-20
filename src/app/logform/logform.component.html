@@ -1,0 +1,50 @@
+<div class="grid-container">
+    <h1 class="mat-h1" style="text-align: center; color: teal;">LOG ANALYTICS</h1>
+    <form (ngSubmit)="functionForm">
+        
+    <mat-grid-list cols="12" rowHeight="150px">
+        <mat-grid-tile colspan="3" rowspan="1">
+            <h3 class="mat-h3" style="margin: 5px; color: cyan;">LOG-TYPE: </h3>
+            <mat-form-field>
+            <mat-select [formControl]="logtypeControl" #logtype required>
+                <mat-option *ngFor="let logtype of logtypes" [value]="logtype.name">{{ logtype.name }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="logtypeControl.hasError('required')">Select a Logtype</mat-error>
+        </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="1">
+            <h3 class="mat-h3" style="margin: 5px; color: cyan;">CONTROLLER-ID: </h3>
+        <mat-form-field>
+            <mat-select [formControl]="controlleridControl" #controllerid required>
+                <mat-option *ngFor="let controllerid of controllerids" [value]="controllerid.value">
+                    {{ controllerid.value }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="controlleridControl.hasError('required')">Select a Controller ID</mat-error>
+        </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3" rowspan="1">
+            <h3 class="mat-h3" style="margin: 5px; color: cyan;">FROM: </h3>
+            <mat-form-field>
+            <input #fromdate matInput [matDatepicker]="frompicker" placeholder="Choose a date" required>
+            <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+            <mat-datepicker #frompicker></mat-datepicker>
+            </mat-form-field>            
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3" rowspan="1">
+            <h3 class="mat-h3" style="margin: 5px; color: cyan;">TO: </h3>
+            <mat-form-field>
+            <input #todate matInput [matDatepicker]="topicker" placeholder="Choose a date" required>
+            <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+            <mat-datepicker #topicker></mat-datepicker>
+            </mat-form-field>      
+        </mat-grid-tile>  
+    </mat-grid-list>
+    <div style="text-align: center;">
+    <button mat-raised-button (click)="buttonData(logtype.value, controllerid.value, fromdate.value, todate.value)">Submit</button>
+</div>
+</form>
+<div *ngFor="let post of posts | async">
+    {{ post | json }}
+</div>
+</div>
